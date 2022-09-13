@@ -32,6 +32,12 @@ jobs:
       - name: Install Dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: flit install --symlink
+      - name: pydantic
+        run: pip install pydantic
+      - name: starlette
+        run: pip3 install starlette
+      - name: uvicorn
+        run: pip3 install uvicorn
       - name: Lint
         if: ${{ matrix.python-version != '3.6' }}
         run: bash scripts/lint.sh
