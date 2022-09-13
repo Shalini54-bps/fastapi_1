@@ -59,7 +59,9 @@ jobs:
             ${{ env.img }} \
             bash -exc '${{ env.py }} -m venv .env && \
             source .env/bin/activate && \
+            set FLIT_ROOT_INSTALL=1 && \
             pip install flit && \
             flit install --symlink && \
             bash scripts/test.sh && \
+            codecov/codecov-action@v3 && \ 
             deactivate'
