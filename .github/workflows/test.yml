@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.6", "3.7", "3.8", "3.9", "3.10"]
+        python-version: ["3.8"]
       fail-fast: false
 
     steps:
@@ -32,15 +32,6 @@ jobs:
       - name: Install Dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: flit install --symlink
-      - name: pydantic
-        run: pip install pydantic
-      - name: starlette
-        run: pip3 install starlette
-      - name: uvicorn
-        run: pip3 install uvicorn
-      - name: Lint
-        if: ${{ matrix.python-version != '3.6' }}
-        run: bash scripts/lint.sh
       - name: Test
         run: bash scripts/test.sh
       - name: Upload coverage
